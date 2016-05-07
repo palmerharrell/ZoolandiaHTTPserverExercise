@@ -71,8 +71,21 @@ namespace SimpleServer
 
 				break;
 			case "habitats":
-				break;
-			case "employees":
+          Console.WriteLine("Habitats route");
+          if (urlParams.Length > 2)
+          {
+            Console.WriteLine("Getting a single habitat");
+            AnimalHandler animals = new AnimalHandler();
+            message = animals.getHabitat(urlParams[2]);
+          }
+          else
+          {
+            Console.WriteLine("Getting all habitats");
+            AnimalHandler animals = new AnimalHandler();
+            message = animals.getAllHabitats();
+          }
+          break;
+			case "employees": // incomplete
 				break;
 			}
 				
