@@ -107,14 +107,14 @@ namespace SimpleServer
           if (urlParams.Length > 2)
           {
             Console.WriteLine("Getting a single habitat");
-            AnimalHandler animals = new AnimalHandler();
-            message = animals.getHabitat(urlParams[2]);
+            HabitatHandler habitats = new HabitatHandler();
+            message = habitats.getHabitat(urlParams[2]);
           }
           else
           {
             Console.WriteLine("Getting all habitats");
-            AnimalHandler animals = new AnimalHandler();
-            message = animals.getAllHabitats();
+            HabitatHandler habitats = new HabitatHandler();
+            message = habitats.getAllHabitats();
           }
           break;
 			case "employees":
@@ -122,14 +122,14 @@ namespace SimpleServer
           if (urlParams.Length > 2)
           {
             Console.WriteLine("Getting a single employee");
-            AnimalHandler animals = new AnimalHandler();
-            message = animals.getEmployee(urlParams[2]);
+            EmployeeHandler employees = new EmployeeHandler();
+            message = employees.getEmployee(urlParams[2]);
           }
           else
           {
             Console.WriteLine("Getting all employees");
-            AnimalHandler animals = new AnimalHandler();
-            message = animals.getAllEmployees();
+            EmployeeHandler employees = new EmployeeHandler();
+            message = employees.getAllEmployees();
           }
           break;
 			}
