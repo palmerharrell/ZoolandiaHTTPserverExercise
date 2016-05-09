@@ -50,9 +50,41 @@ namespace SimpleServer
 			Console.WriteLine("request: {0}", p.http_url);
 
 
-			p.outputStream.WriteLine("<html><head><title>Zoolandia</title></head><body>");
-			p.outputStream.WriteLine("Current Time: " + DateTime.Now.ToString());
-
+      p.outputStream.WriteLine("<html><head><title>Zoolandia</title>");
+      p.outputStream.WriteLine(@"
+        <style>
+        ul {
+          list-style: none;
+        }
+        .menu li {
+          float: left;
+          text-decoration: none;
+          font-weight: bold;
+          margin: 10px;
+        }
+        .content {
+          clear: both;
+          border: 1px solid royalblue;
+          margin: 30px;
+          padding: 10px;
+        }
+        .content ul {
+          margin-top: 0;
+        }
+        h2, h3 {
+          margin-bottom: 0;
+        }
+        </style>
+        ");
+      p.outputStream.WriteLine("</head><body>");
+      p.outputStream.WriteLine("Current Time: " + DateTime.Now.ToString());
+      p.outputStream.WriteLine("<ul class=\"menu\">");
+      p.outputStream.WriteLine("<li><a href=\"/\">Home</a></li>");
+			p.outputStream.WriteLine("<li><a href=\"/animals\">Animals</a></li>");
+			p.outputStream.WriteLine("<li><a href=\"/habitats\">Habitats</a></li>");
+			p.outputStream.WriteLine("<li><a href=\"/employees\">Employees</a></li></ul>");
+      p.outputStream.WriteLine("</div>");
+      
 			string[] urlParams = p.http_url.Split ('/');
 			string type = urlParams [1].ToString ();
 
@@ -85,8 +117,21 @@ namespace SimpleServer
             message = animals.getAllHabitats();
           }
           break;
-			case "employees": // incomplete
-				break;
+			case "employees":
+          Console.WriteLine("Employees route");
+          if (urlParams.Length > 2)
+          {
+            Console.WriteLine("Getting a single employee");
+            AnimalHandler animals = new AnimalHandler();
+            message = animals.getEmployee(urlParams[2]);
+          }
+          else
+          {
+            Console.WriteLine("Getting all employees");
+            AnimalHandler animals = new AnimalHandler();
+            message = animals.getAllEmployees();
+          }
+          break;
 			}
 				
 			p.outputStream.WriteLine(message);
